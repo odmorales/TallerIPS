@@ -1,0 +1,9 @@
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\TallerPractico.exe.config
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\TallerPractico.exe
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\TallerPractico.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\Entity.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\Entity.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.csprojAssemblyReference.cache
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.csproj.CopyComplete
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.exe
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.pdb
