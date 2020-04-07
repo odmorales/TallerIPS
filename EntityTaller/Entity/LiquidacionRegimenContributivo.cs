@@ -10,7 +10,7 @@ namespace Entity
     {
 
         const decimal SALARIOMINIMO = 877000;
-        public override double CalcularCuotaModerada(long valorServicio, long salario)
+        public override double CalcularLiquidacion(long valorServicio, long salario)
         {
             double cuotaModerada;
 
@@ -43,6 +43,14 @@ namespace Entity
             return cuotaModerada;
         }
 
+        public override double CalcularValorReal(long valorServicio, long salario)
+        {
+            
+            double valor = valorServicio * CalcularTarifa(salario);
+
+
+            return valor;
+        }
        
         
         public int  CalcularEquivalenciaSalarioMinimo(long salario)

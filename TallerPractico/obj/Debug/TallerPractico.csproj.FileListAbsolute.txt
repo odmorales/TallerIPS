@@ -7,3 +7,7 @@ C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractic
 C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.csproj.CopyComplete
 C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.exe
 C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\obj\Debug\TallerPractico.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\BLL.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\DAL.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\BLL.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\TallerPractico\bin\Debug\DAL.pdb

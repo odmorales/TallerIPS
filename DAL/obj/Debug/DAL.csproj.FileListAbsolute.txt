@@ -1,0 +1,8 @@
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\bin\Debug\DAL.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\bin\Debug\DAL.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\bin\Debug\Entity.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\bin\Debug\Entity.pdb
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\obj\Debug\DAL.dll
+C:\Users\oscar\Desktop\ProyectosC#\Taller\DAL\obj\Debug\DAL.pdb

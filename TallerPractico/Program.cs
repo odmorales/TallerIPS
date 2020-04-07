@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
+using BLL;
 
 
 namespace TallerPractico
@@ -14,24 +15,44 @@ namespace TallerPractico
         {
 
             Liquidacion liquidacion = new LiquidacionRegimenContributivo();
+            LiquidacionCuotaModeradoraService liquidacionCuotaModeradoraService = new LiquidacionCuotaModeradoraService();
 
-            Liquidacion liquidacion1 = new LiquidacionRegimenSubsidiado();
+            liquidacion.Identificacion = "123";
+            liquidacion.NumeroLiquidacion = "1";
+            liquidacion.Salario = 900000;
+            liquidacion.TipoAfiliacion = "Contribuyente";
+            liquidacion.ValorServicio = 250000;
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion.CalcularCuotaModerada(250000, 879000)}");
+            liquidacion.ValorReal = liquidacion.CalcularLiquidacion(liquidacion.ValorServicio, liquidacion.Salario);
+            liquidacion.CuotaModerada = liquidacion.CalcularValorReal(liquidacion.ValorServicio, liquidacion.Salario);
+            liquidacion.Tarifa = liquidacion.CalcularTarifa(liquidacion.Salario);
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion.CalcularCuotaModerada(2500000, 2631000)}");
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion.CalcularCuotaModerada(5500000, 2631000)}");
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion.CalcularCuotaModerada(550000, 263100000)}");
+            liquidacionCuotaModeradoraService.GuardarRegimenContributivo(liquidacion);
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion1.CalcularCuotaModerada(250000, 0)}");
+            //liquidacion = liquidacionCuotaModeradoraService.BuscarRegimenContributivo("1");
 
-            Console.WriteLine($"Usted debe pagar: {liquidacion1.CalcularCuotaModerada(500000, 0)}");
+            //if (liquidacion != null)
+            //{
+            //    Console.WriteLine("Encontrado");
+
+            //    liquidacion.ValorServicio = 340000;
+
+            //    liquidacion.ValorReal = liquidacion.CalcularLiquidacion(liquidacion.ValorServicio, liquidacion.Salario);
+            //    liquidacion.CuotaModerada = liquidacion.CalcularValorReal(liquidacion.ValorServicio, liquidacion.Salario);
+            //    liquidacion.Tarifa = liquidacion.CalcularTarifa(liquidacion.Salario);
+
+            //    liquidacionCuotaModeradoraService.ModificarRegimenContributivo(liquidacion);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No existe");
+            //}
+
 
 
             Console.ReadKey();
-
         }
     }
 }
