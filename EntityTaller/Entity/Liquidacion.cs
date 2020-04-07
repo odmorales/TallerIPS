@@ -20,6 +20,7 @@ namespace Entity
         public abstract double CalcularLiquidacion(long valorServicio,long salario);
 
         public abstract double CalcularValorReal(long valorServicio, long salario);
+
         public abstract double CalcularTarifa(long salario);
         
          

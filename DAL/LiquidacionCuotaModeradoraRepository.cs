@@ -11,7 +11,7 @@ namespace DAL
     public class LiquidacionCuotaModeradoraRepository
     {
 
-        private string rutaSubsiado = "LiquidacionSubsiadiado.txt";
+        private string rutaSubsiadiado = "LiquidacionSubsiadiado.txt";
 
         private string rutaContribuyente = "LiquidacionContribuyente.txt";
 
@@ -121,7 +121,7 @@ namespace DAL
 
         public void GuardarRegimenSubsidiado(Liquidacion liquidacionRegimenSubsidiado)
         {
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.Append);
+            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Append);
             StreamWriter escritor = new StreamWriter(fileStream);
 
             escritor.WriteLine($"{liquidacionRegimenSubsidiado.Identificacion};{liquidacionRegimenSubsidiado.NumeroLiquidacion};{liquidacionRegimenSubsidiado.Salario};" +
@@ -136,7 +136,7 @@ namespace DAL
         {
             listaSubsidiado = new List<LiquidacionRegimenSubsidiado>();
 
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.OpenOrCreate, FileAccess.Read);
+            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader leer = new StreamReader(fileStream);
 
             string Linea = string.Empty;
@@ -164,6 +164,56 @@ namespace DAL
             fileStream.Close();
 
             return listaSubsidiado;
+        }
+        public void EliminarRegimenSubsidiado(string numeroLiquidacion)
+        {
+
+            listaSubsidiado = ConsultarRegimenSubsidiado();
+
+            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Create);
+            fileStream.Close();
+
+            foreach (var item in listaSubsidiado)
+            {
+                if (item.NumeroLiquidacion != numeroLiquidacion)
+                {
+                    GuardarRegimenSubsidiado(item);
+                }
+            }
+        }
+
+        public void ModificarRegimenSubsidiado(Liquidacion liquidacionRegimenSubsidiado)
+        {
+            listaSubsidiado = ConsultarRegimenSubsidiado();
+
+            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Create);
+            fileStream.Close();
+
+            foreach (var item in listaSubsidiado)
+            {
+                if (item.NumeroLiquidacion.Equals(liquidacionRegimenSubsidiado.NumeroLiquidacion))
+                {
+                    GuardarRegimenContributivo(liquidacionRegimenSubsidiado);
+                }
+                else
+                {
+                    GuardarRegimenSubsidiado(item);
+                }
+            }
+        }
+        public LiquidacionRegimenSubsidiado BuscarSubsidiado(string numeroLiquidacion)
+        {
+            listaSubsidiado = ConsultarRegimenSubsidiado();
+
+            foreach (var item in listaSubsidiado)
+            {
+                if (item.NumeroLiquidacion.Equals(numeroLiquidacion))
+                {
+                    return item;
+                }
+            }
+
+            return null;
         }
     }
 }
