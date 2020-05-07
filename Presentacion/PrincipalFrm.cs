@@ -45,5 +45,15 @@ namespace Presentacion
         {
             AbrirFormularioHijo(new ConsultarLiquidacionFrm());
         }
+
+        private void ModificarBtn_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioHijo(new ModificarLiquidacionFrm());
+        }
+
+        private void EliminarBton_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioHijo(new EliminarLiquidacionFrm());
+        }
     }
 }

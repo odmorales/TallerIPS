@@ -12,7 +12,7 @@ namespace BLL
     {
 
         LiquidacionCuotaModeradoraRepository liquidacionCuotaModeradoraRepository;
-        Liquidacion liquidacion;
+        
         
 
         public string Guardar(Liquidacion liquidacion)

@@ -15,6 +15,7 @@ namespace Presentacion
     public partial class EliminarLiquidacionFrm : Form
     {
         LiquidacionCuotaModeradoraService liquidacion = new LiquidacionCuotaModeradoraService();
+        
         public EliminarLiquidacionFrm()
         {
             InitializeComponent();

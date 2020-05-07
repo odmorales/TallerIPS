@@ -42,9 +42,9 @@ namespace Presentacion
             liquidacion.ValorServicio = Convert.ToInt64(ValorServicioTxt.Text);
             liquidacion.Nombre = NombreTxt.Text;
             liquidacion.Fecha = FechaLiquidacion.Value.Date;
-            liquidacion.CalcularTarifa(liquidacion.Salario);
+            liquidacion.CalcularTarifa();
             liquidacion.CalcularCuatoModeradora();
-            liquidacion.CalcularTope(liquidacion.Salario);
+            liquidacion.CalcularTope();
             MessageBox.Show(liquidacionCuotaModeradoraService.Guardar(liquidacion),"Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }

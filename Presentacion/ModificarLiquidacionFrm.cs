@@ -15,6 +15,7 @@ namespace Presentacion
     public partial class ModificarLiquidacionFrm : Form
     {
         LiquidacionCuotaModeradoraService liquidacion = new LiquidacionCuotaModeradoraService();
+        Liquidacion liquidacion1;
         public ModificarLiquidacionFrm()
         {
             InitializeComponent();
@@ -27,6 +28,9 @@ namespace Presentacion
             respuesta = liquidacion.Buscar(NoLiquidacionTxt.Text);
             MessageBox.Show(respuesta.Mensaje,"Descripcion",MessageBoxButtons.OK,MessageBoxIcon.Information);
             MessageBox.Show(liquidacion.Modificar(respuesta.liquidacion), "Descripcion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            liquidacion1.CalcularTarifa();
+            liquidacion1.CalcularCuatoModeradora();
+            liquidacion1.CalcularTope();
         }
     }
 }

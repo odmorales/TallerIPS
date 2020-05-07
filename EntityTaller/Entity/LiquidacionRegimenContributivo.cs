@@ -15,9 +15,9 @@ namespace Entity
             CuotaModerada = ValorServicio * Tarifa;
         }
 
-        public override void CalcularTope(long salario)
+        public override void CalcularTope()
         {
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
 
             if ((cantidadSalario < 2) && (CuotaModerada > 250000))
             {
@@ -44,9 +44,9 @@ namespace Entity
             return cantidadSalario;
         }
 
-        public override void CalcularTarifa(long salario)
+        public override void CalcularTarifa()
         {
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
 
             if (cantidadSalario < 2)
             {
@@ -60,8 +60,6 @@ namespace Entity
             {
                 Tarifa = 0.25;  
             }
-            
-
         }
     }
 }

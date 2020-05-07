@@ -10,20 +10,24 @@ namespace Entity
     {
         public override void CalcularCuatoModeradora()
         {
-            CalcularTarifa(Salario);
+            
             CuotaModerada = ValorServicio * Tarifa;
 
         }
 
-        public override void CalcularTope(long salario)
+        public override void CalcularTope()
         {
             if (CuotaModerada > 200000)
             {
                 Tope = 200000;
             }
-            Tope = 0;
+            else
+            {
+                Tope = 0;
+            }
+            
         }
-        public override void CalcularTarifa(long salario)
+        public override void CalcularTarifa()
         {
             Tarifa = 0.5;
         }

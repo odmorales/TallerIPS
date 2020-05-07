@@ -64,14 +64,14 @@
             this.BarraTituloPnl.Dock = System.Windows.Forms.DockStyle.Top;
             this.BarraTituloPnl.Location = new System.Drawing.Point(0, 0);
             this.BarraTituloPnl.Name = "BarraTituloPnl";
-            this.BarraTituloPnl.Size = new System.Drawing.Size(958, 35);
+            this.BarraTituloPnl.Size = new System.Drawing.Size(1102, 35);
             this.BarraTituloPnl.TabIndex = 3;
             // 
             // BtonMinimizar
             // 
             this.BtonMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtonMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("BtonMinimizar.Image")));
-            this.BtonMinimizar.Location = new System.Drawing.Point(859, 7);
+            this.BtonMinimizar.Location = new System.Drawing.Point(1003, 7);
             this.BtonMinimizar.Name = "BtonMinimizar";
             this.BtonMinimizar.Size = new System.Drawing.Size(25, 25);
             this.BtonMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,7 +82,7 @@
             // 
             this.BtonRestaurar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtonRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("BtonRestaurar.Image")));
-            this.BtonRestaurar.Location = new System.Drawing.Point(890, 7);
+            this.BtonRestaurar.Location = new System.Drawing.Point(1034, 7);
             this.BtonRestaurar.Name = "BtonRestaurar";
             this.BtonRestaurar.Size = new System.Drawing.Size(25, 25);
             this.BtonRestaurar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -94,7 +94,7 @@
             // 
             this.BtnMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnMaximizar.Image = ((System.Drawing.Image)(resources.GetObject("BtnMaximizar.Image")));
-            this.BtnMaximizar.Location = new System.Drawing.Point(890, 7);
+            this.BtnMaximizar.Location = new System.Drawing.Point(1034, 7);
             this.BtnMaximizar.Name = "BtnMaximizar";
             this.BtnMaximizar.Size = new System.Drawing.Size(25, 25);
             this.BtnMaximizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -105,7 +105,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(921, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(1065, 7);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 25);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -155,6 +155,7 @@
             this.EliminarBton.TabIndex = 7;
             this.EliminarBton.Text = "Eliminar";
             this.EliminarBton.UseVisualStyleBackColor = false;
+            this.EliminarBton.Click += new System.EventHandler(this.EliminarBton_Click);
             // 
             // panel3
             // 
@@ -232,6 +233,7 @@
             this.ModificarBtn.TabIndex = 1;
             this.ModificarBtn.Text = "Modificar";
             this.ModificarBtn.UseVisualStyleBackColor = false;
+            this.ModificarBtn.Click += new System.EventHandler(this.ModificarBtn_Click);
             // 
             // pictureBox2
             // 
@@ -249,14 +251,14 @@
             this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelContenedor.Location = new System.Drawing.Point(226, 35);
             this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(732, 530);
-            this.PanelContenedor.TabIndex = 5;
+            this.PanelContenedor.Size = new System.Drawing.Size(876, 530);
+            this.PanelContenedor.TabIndex = 6;
             // 
             // PrincipalFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 565);
+            this.ClientSize = new System.Drawing.Size(1102, 565);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.MenuVertical);
             this.Controls.Add(this.BarraTituloPnl);
