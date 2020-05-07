@@ -21,9 +21,9 @@ namespace Entity
         public string Nombre { get; set; }
         public abstract void CalcularCuatoModeradora();
 
-        public abstract void CalcularTope();
+        public abstract void CalcularTope(long salario);
 
-        public abstract void CalcularTarifa();
+        public abstract void CalcularTarifa(long salario);
         
          
         

@@ -23,7 +23,10 @@ namespace Presentacion
        
         private void ModificarBton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(liquidacion.Modificar(liquidacion.Buscar(NoLiquidacionTxt.Text)),"Descripcion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            RespuestaBuscar respuesta = new RespuestaBuscar();
+            respuesta = liquidacion.Buscar(NoLiquidacionTxt.Text);
+            MessageBox.Show(respuesta.Mensaje,"Descripcion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(liquidacion.Modificar(respuesta.liquidacion), "Descripcion", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -12,15 +12,12 @@ namespace Entity
         const decimal SALARIOMINIMO = 877000;
         public override void CalcularCuatoModeradora()
         {
-            CalcularTarifa();
-
             CuotaModerada = ValorServicio * Tarifa;
-
         }
 
-        public override void CalcularTope()
+        public override void CalcularTope(long salario)
         {
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
 
             if ((cantidadSalario < 2) && (CuotaModerada > 250000))
             {
@@ -35,7 +32,6 @@ namespace Entity
                 Tope = 1500000;
             }
 
-            Tope = 0;
         }
 
 
@@ -48,9 +44,9 @@ namespace Entity
             return cantidadSalario;
         }
 
-        public override void CalcularTarifa()
+        public override void CalcularTarifa(long salario)
         {
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
 
             if (cantidadSalario < 2)
             {
@@ -60,8 +56,11 @@ namespace Entity
             {
                 Tarifa = 0.2;
             }
-
-            Tarifa = 0.25;
+            else
+            {
+                Tarifa = 0.25;  
+            }
+            
 
         }
     }

@@ -72,6 +72,7 @@ namespace DAL
                 liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
                 liquidacion.Nombre = Datos[8];
                 liquidacion.Fecha = Convert.ToDateTime(Datos[9]);
+                liquidacion.Tope = Convert.ToInt64(Datos[10]);
 
                 lista.Add(liquidacion);
             }
