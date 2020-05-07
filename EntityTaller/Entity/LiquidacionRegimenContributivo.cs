@@ -10,49 +10,31 @@ namespace Entity
     {
 
         const decimal SALARIOMINIMO = 877000;
-        public override double CalcularLiquidacion(long valorServicio, long salario)
+        public override void CalcularCuatoModeradora()
         {
-            double cuotaModerada;
+            CalcularTarifa();
 
-            cuotaModerada = valorServicio * CalcularTarifa(salario);
+            CuotaModerada = ValorServicio * Tarifa;
 
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
-
-            if ((cantidadSalario < 2) && (cuotaModerada > 250000))
-            {
-                return 250000;
-            }
-            else if (((cantidadSalario >= 2) || (cantidadSalario <= 5)) && (cuotaModerada > 900000))
-            {
-                return 900000;
-            }
-            else if (cantidadSalario > 5)
-            {
-                return 1500000;
-            }
-            else if ((cantidadSalario < 2) && (cuotaModerada < 250000))
-            {
-                return cuotaModerada;
-
-            }
-            else if (((cantidadSalario >= 2) || (cantidadSalario <= 5)) && (cuotaModerada < 1500000))
-            {
-                return cuotaModerada;
-            }
-
-            return cuotaModerada;
         }
 
-        public override double CalcularValorReal(long valorServicio, long salario)
+        public override void CalcularTope()
         {
-            
-            double valor = valorServicio * CalcularTarifa(salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
 
+            if ((cantidadSalario < 2) && (CuotaModerada > 250000))
+            {
+                Tope = 250000;
+            }
+            else if (((cantidadSalario >= 2) || (cantidadSalario <= 5)) && (CuotaModerada > 900000))
+            {
+                Tope = 900000;
+            }
 
-            return valor;
+            Tope = 1500000;
         }
-       
-        
+
+
         public int  CalcularEquivalenciaSalarioMinimo(long salario)
         {
             int cantidadSalario;
@@ -62,20 +44,20 @@ namespace Entity
             return cantidadSalario;
         }
 
-        public override double CalcularTarifa(long salario)
+        public override void CalcularTarifa()
         {
-            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(salario);
+            int cantidadSalario = CalcularEquivalenciaSalarioMinimo(Salario);
 
             if (cantidadSalario < 2)
             {
-                return 0.15;
+                Tarifa = 0.15;
             }
             else if ((cantidadSalario >= 2) || (cantidadSalario <= 5))
             {
-                return 0.2;
+                Tarifa = 0.2;
             }
 
-            return 0.25;
+            Tarifa = 0.25;
 
         }
     }

@@ -12,16 +12,17 @@ namespace Entity
         public string Identificacion { get; set; }
         public string TipoAfiliacion { get; set; }
         public long Salario { get; set; }
+        public long Tope { get; set; }
         public long ValorServicio { get; set; }
         public double Tarifa { get; set; }
         public double CuotaModerada { get; set; }
         public double ValorReal { get; set; }
 
-        public abstract double CalcularLiquidacion(long valorServicio,long salario);
+        public abstract void CalcularCuatoModeradora();
 
-        public abstract double CalcularValorReal(long valorServicio, long salario);
+        public abstract void CalcularTope();
 
-        public abstract double CalcularTarifa(long salario);
+        public abstract void CalcularTarifa();
         
          
         

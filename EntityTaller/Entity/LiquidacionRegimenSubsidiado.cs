@@ -8,31 +8,24 @@ namespace Entity
 {
     public class LiquidacionRegimenSubsidiado : Liquidacion
     {
-        public override double CalcularLiquidacion(long valorServicio,long salario)
+        public override void CalcularCuatoModeradora()
         {
-            double cuotaModerada;
+            CalcularTarifa();
+            CuotaModerada = ValorServicio * Tarifa;
 
-            cuotaModerada = valorServicio * CalcularTarifa(salario);
+        }
 
-            if(cuotaModerada > 200000)
+        public override void CalcularTope()
+        {
+            if (CuotaModerada > 200000)
             {
-                return 200000;
+                Tope = 200000;
             }
 
-            return cuotaModerada;
         }
-
-        public override double CalcularValorReal(long valorServicio, long salario)
+        public override void CalcularTarifa()
         {
-
-            double valor = valorServicio * CalcularTarifa(salario);
-
-            return valor;
-
-        }
-        public override double CalcularTarifa(long salario)
-        {
-            return 0.5;
+            Tarifa = 0.5;
         }
     }
 }

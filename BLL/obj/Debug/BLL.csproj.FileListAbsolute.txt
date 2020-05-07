@@ -8,3 +8,13 @@ C:\Users\oscar\Desktop\ProyectosC#\Taller\BLL\obj\Debug\BLL.csprojAssemblyRefere
 C:\Users\oscar\Desktop\ProyectosC#\Taller\BLL\obj\Debug\BLL.csproj.CopyComplete
 C:\Users\oscar\Desktop\ProyectosC#\Taller\BLL\obj\Debug\BLL.dll
 C:\Users\oscar\Desktop\ProyectosC#\Taller\BLL\obj\Debug\BLL.pdb
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\BLL.dll
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\BLL.pdb
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\DAL.dll
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\Entity.dll
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\DAL.pdb
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\bin\Debug\Entity.pdb
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\obj\Debug\BLL.dll
+C:\Users\oscar\source\repos\TallerIPS\TallerIPS\BLL\obj\Debug\BLL.pdb

@@ -65,8 +65,8 @@ namespace TallerPractico
                                     Console.WriteLine("Digite el valor del servicio hospitalizacion prestado");
                                     liquidacion.ValorServicio = Convert.ToInt64(Console.ReadLine());
 
-                                    liquidacion.ValorReal = liquidacion.CalcularLiquidacion(liquidacion.ValorServicio, liquidacion.Salario);
-                                    liquidacion.CuotaModerada = liquidacion.CalcularValorReal(liquidacion.ValorServicio, liquidacion.Salario);
+                                    liquidacion.ValorReal = liquidacion.CalcularCuatoModeradora(liquidacion.ValorServicio, liquidacion.Salario);
+                                    liquidacion.CuotaModerada = liquidacion.CalcularTope(liquidacion.ValorServicio, liquidacion.Salario);
                                     liquidacion.Tarifa = liquidacion.CalcularTarifa(liquidacion.Salario);
 
                                     liquidacionCuotaModeradoraService.GuardarRegimenContributivo(liquidacion);
@@ -107,8 +107,8 @@ namespace TallerPractico
                                     Console.WriteLine("Digite el nuevo valor del servicio");
                                     liquidacion.ValorServicio = Convert.ToInt64(Console.ReadLine());
 
-                                    liquidacion.ValorReal = liquidacion.CalcularLiquidacion(liquidacion.ValorServicio, liquidacion.Salario);
-                                    liquidacion.CuotaModerada = liquidacion.CalcularValorReal(liquidacion.ValorServicio, liquidacion.Salario);
+                                    liquidacion.ValorReal = liquidacion.CalcularCuatoModeradora(liquidacion.ValorServicio, liquidacion.Salario);
+                                    liquidacion.CuotaModerada = liquidacion.CalcularTope(liquidacion.ValorServicio, liquidacion.Salario);
                                     liquidacion.Tarifa = liquidacion.CalcularTarifa(liquidacion.Salario);
 
                                     liquidacionCuotaModeradoraService.ModificarRegimenContributivo(liquidacion);
@@ -173,8 +173,8 @@ namespace TallerPractico
                                     Console.WriteLine("Digite el valor del servicio hospitalizacion prestado");
                                     liquidacion1.ValorServicio = Convert.ToInt64(Console.ReadLine());
 
-                                    liquidacion1.ValorReal = liquidacion1.CalcularLiquidacion(liquidacion1.ValorServicio, liquidacion1.Salario);
-                                    liquidacion1.CuotaModerada = liquidacion1.CalcularValorReal(liquidacion1.ValorServicio, liquidacion1.Salario);
+                                    liquidacion1.ValorReal = liquidacion1.CalcularCuatoModeradora(liquidacion1.ValorServicio, liquidacion1.Salario);
+                                    liquidacion1.CuotaModerada = liquidacion1.CalcularTope(liquidacion1.ValorServicio, liquidacion1.Salario);
                                     liquidacion1.Tarifa = liquidacion1.CalcularTarifa(liquidacion1.Salario);
 
                                     liquidacionCuotaModeradoraService.GuardarRegimenSubsidiado(liquidacion1);
@@ -215,8 +215,8 @@ namespace TallerPractico
                                     Console.WriteLine("Digite el nuevo valor del servicio");
                                     liquidacion.ValorServicio = Convert.ToInt64(Console.ReadLine());
 
-                                    liquidacion1.ValorReal = liquidacion1.CalcularLiquidacion(liquidacion1.ValorServicio, liquidacion1.Salario);
-                                    liquidacion1.CuotaModerada = liquidacion1.CalcularValorReal(liquidacion1.ValorServicio, liquidacion1.Salario);
+                                    liquidacion1.ValorReal = liquidacion1.CalcularCuatoModeradora(liquidacion1.ValorServicio, liquidacion1.Salario);
+                                    liquidacion1.CuotaModerada = liquidacion1.CalcularTope(liquidacion1.ValorServicio, liquidacion1.Salario);
                                     liquidacion1.Tarifa = liquidacion1.CalcularTarifa(liquidacion1.Salario);
 
                                     liquidacionCuotaModeradoraService.ModificarRegimenSubsidiado(liquidacion1);

@@ -11,17 +11,20 @@ namespace DAL
     public class LiquidacionCuotaModeradoraRepository
     {
 
-        private string rutaSubsiadiado = "LiquidacionSubsiadiado.txt";
+        
 
-        private string rutaContribuyente = "LiquidacionContribuyente.txt";
+        private string ruta = "Liquidacion.txt";
 
-        private List<LiquidacionRegimenContributivo> listaContributivo;
+        private List<Liquidacion> lista;
 
-        private List<LiquidacionRegimenSubsidiado> listaSubsidiado;
-
-        public void GuardarRegimenContributivo(Liquidacion liquidacionRegimenContributivo)
+        public LiquidacionCuotaModeradoraRepository()
         {
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.Append);
+            lista = new List<Liquidacion>();
+        }
+
+        public void Guardar(Liquidacion liquidacionRegimenContributivo)
+        {
+            FileStream fileStream = new FileStream(ruta, FileMode.Append);
             StreamWriter escritor = new StreamWriter(fileStream);
 
             escritor.WriteLine($"{liquidacionRegimenContributivo.Identificacion};{liquidacionRegimenContributivo.NumeroLiquidacion};{liquidacionRegimenContributivo.Salario};" +
@@ -32,187 +35,109 @@ namespace DAL
             fileStream.Close();
 
         }
-        public List<LiquidacionRegimenContributivo> ConsultarRegimenContributivo()
+        public List<Liquidacion> Consultar()
         {
 
-            listaContributivo = new List<LiquidacionRegimenContributivo>();
-
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.OpenOrCreate, FileAccess.Read);
+            FileStream fileStream = new FileStream(ruta, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader leer = new StreamReader(fileStream);
 
             string Linea = string.Empty;
             Linea = leer.ReadLine();
-            while ((Linea = leer.ReadLine()) != null)
-            {
-                LiquidacionRegimenContributivo liquidacionRegimenContributivo = new LiquidacionRegimenContributivo();
-
-                char delimiter = ';';
-                string[] DatosRegimenContribuyente = Linea.Split(delimiter);
-
-                liquidacionRegimenContributivo.Identificacion = DatosRegimenContribuyente[0];
-                liquidacionRegimenContributivo.NumeroLiquidacion = DatosRegimenContribuyente[1];
-                liquidacionRegimenContributivo.Salario = Convert.ToInt64(DatosRegimenContribuyente[2]);
-                liquidacionRegimenContributivo.Tarifa = Convert.ToDouble(DatosRegimenContribuyente[3]);
-                liquidacionRegimenContributivo.TipoAfiliacion = DatosRegimenContribuyente[4];
-                liquidacionRegimenContributivo.ValorServicio = Convert.ToInt64(DatosRegimenContribuyente[5]);
-                liquidacionRegimenContributivo.CuotaModerada = Convert.ToDouble(DatosRegimenContribuyente[6]);
-                liquidacionRegimenContributivo.ValorReal = Convert.ToDouble(DatosRegimenContribuyente[7]);
-
-                listaContributivo.Add(liquidacionRegimenContributivo);
-            }
+            Linea = Mapear(leer);
 
             leer.Close();
             fileStream.Close();
 
-            return listaContributivo;
-
+            return lista;
         }
 
-        public void EliminarRegimenContributivo(string numeroLiquidacion)
+        private string Mapear(StreamReader leer)
+        {
+            string Linea;
+            Liquidacion liquidacion;
+            while ((Linea = leer.ReadLine()) != null)
+            {
+                char delimiter = ';';
+                string[] Datos = Linea.Split(delimiter);
+                liquidacion = Liquidar(Datos);
+
+                liquidacion.Identificacion = Datos[0];
+                liquidacion.NumeroLiquidacion = Datos[1];
+                liquidacion.Salario = Convert.ToInt64(Datos[2]);
+                liquidacion.Tarifa = Convert.ToDouble(Datos[3]);
+                liquidacion.TipoAfiliacion = Datos[4];
+                liquidacion.ValorServicio = Convert.ToInt64(Datos[5]);
+                liquidacion.CuotaModerada = Convert.ToDouble(Datos[6]);
+                liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
+
+                lista.Add(liquidacion);
+            }
+
+            return Linea;
+        }
+
+        private static Liquidacion Liquidar(string[] Datos)
+        {
+            Liquidacion liquidacion;
+            if (Datos[4].Equals("Contribuyente"))
+            {
+                liquidacion = new LiquidacionRegimenContributivo();
+            }
+            else
+            {
+                liquidacion = new LiquidacionRegimenSubsidiado();
+            }
+
+            return liquidacion;
+        }
+
+        public void Eliminar(string numeroLiquidacion)
         {
 
-            listaContributivo = ConsultarRegimenContributivo();
+            lista = Consultar();
 
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.Create);
+            FileStream fileStream = new FileStream(ruta, FileMode.Create);
             fileStream.Close();
 
-            foreach (var item in listaContributivo)
+            foreach (var item in lista)
             {
                 if(item.NumeroLiquidacion != numeroLiquidacion)
                 {
-                    GuardarRegimenContributivo(item);
+                    Guardar(item);
                 }
             }
         }
 
-        public void ModificarRegimenContributivo(Liquidacion liquidacionRegimenContributivo)
+        public void Modificar(Liquidacion liquidacion)
         {
-            listaContributivo = ConsultarRegimenContributivo();
+            lista = Consultar();
 
-            FileStream fileStream = new FileStream(rutaContribuyente, FileMode.Create);
+            FileStream fileStream = new FileStream(ruta, FileMode.Create);
             fileStream.Close();
 
-            foreach (var item in listaContributivo)
+            foreach (var item in lista)
             {
-                if (item.NumeroLiquidacion.Equals(liquidacionRegimenContributivo.NumeroLiquidacion))
+                if (item.NumeroLiquidacion.Equals(liquidacion.NumeroLiquidacion))
                 {
-                    GuardarRegimenContributivo(liquidacionRegimenContributivo);
+                    Guardar(liquidacion);
                 }
                 else
                 {
-                    GuardarRegimenContributivo(item);
+                    Guardar(item);
                 }
             }
         }
-         public LiquidacionRegimenContributivo Buscar(string numeroLiquidacion)
+         public Liquidacion Buscar(string numeroLiquidacion)
         {
-            listaContributivo = ConsultarRegimenContributivo();
+            lista = Consultar();
 
-            foreach (var item in listaContributivo)
+            foreach (var item in lista)
             {
                 if (item.NumeroLiquidacion.Equals(numeroLiquidacion))
                 {
                     return item;
                 }
             }
-
-            return null;
-        }
-
-        public void GuardarRegimenSubsidiado(Liquidacion liquidacionRegimenSubsidiado)
-        {
-            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Append);
-            StreamWriter escritor = new StreamWriter(fileStream);
-
-            escritor.WriteLine($"{liquidacionRegimenSubsidiado.Identificacion};{liquidacionRegimenSubsidiado.NumeroLiquidacion};{liquidacionRegimenSubsidiado.Salario};" +
-                $"{liquidacionRegimenSubsidiado.Tarifa};{liquidacionRegimenSubsidiado.TipoAfiliacion};{liquidacionRegimenSubsidiado.ValorServicio};" +
-                $"{liquidacionRegimenSubsidiado.CuotaModerada};{liquidacionRegimenSubsidiado.ValorReal}");
-
-            escritor.Close();
-            fileStream.Close();
-        }
-
-        public List<LiquidacionRegimenSubsidiado> ConsultarRegimenSubsidiado()
-        {
-            listaSubsidiado = new List<LiquidacionRegimenSubsidiado>();
-
-            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader leer = new StreamReader(fileStream);
-
-            string Linea = string.Empty;
-            Linea = leer.ReadLine();
-            while ((Linea = leer.ReadLine()) != null)
-            {
-                LiquidacionRegimenSubsidiado liquidacionRegimenSubsidiado = new LiquidacionRegimenSubsidiado();
-
-                char delimiter = ';';
-                string[] DatosRegimenContribuyente = Linea.Split(delimiter);
-
-                liquidacionRegimenSubsidiado.Identificacion = DatosRegimenContribuyente[0];
-                liquidacionRegimenSubsidiado.NumeroLiquidacion = DatosRegimenContribuyente[1];
-                liquidacionRegimenSubsidiado.Salario = Convert.ToInt64(DatosRegimenContribuyente[2]);
-                liquidacionRegimenSubsidiado.Tarifa = Convert.ToDouble(DatosRegimenContribuyente[3]);
-                liquidacionRegimenSubsidiado.TipoAfiliacion = DatosRegimenContribuyente[4];
-                liquidacionRegimenSubsidiado.ValorServicio = Convert.ToInt64(DatosRegimenContribuyente[5]);
-                liquidacionRegimenSubsidiado.CuotaModerada = Convert.ToDouble(DatosRegimenContribuyente[6]);
-                liquidacionRegimenSubsidiado.ValorReal = Convert.ToDouble(DatosRegimenContribuyente[7]);
-
-                listaSubsidiado.Add(liquidacionRegimenSubsidiado);
-            }
-
-            leer.Close();
-            fileStream.Close();
-
-            return listaSubsidiado;
-        }
-        public void EliminarRegimenSubsidiado(string numeroLiquidacion)
-        {
-
-            listaSubsidiado = ConsultarRegimenSubsidiado();
-
-            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Create);
-            fileStream.Close();
-
-            foreach (var item in listaSubsidiado)
-            {
-                if (item.NumeroLiquidacion != numeroLiquidacion)
-                {
-                    GuardarRegimenSubsidiado(item);
-                }
-            }
-        }
-
-        public void ModificarRegimenSubsidiado(Liquidacion liquidacionRegimenSubsidiado)
-        {
-            listaSubsidiado = ConsultarRegimenSubsidiado();
-
-            FileStream fileStream = new FileStream(rutaSubsiadiado, FileMode.Create);
-            fileStream.Close();
-
-            foreach (var item in listaSubsidiado)
-            {
-                if (item.NumeroLiquidacion.Equals(liquidacionRegimenSubsidiado.NumeroLiquidacion))
-                {
-                    GuardarRegimenContributivo(liquidacionRegimenSubsidiado);
-                }
-                else
-                {
-                    GuardarRegimenSubsidiado(item);
-                }
-            }
-        }
-        public LiquidacionRegimenSubsidiado BuscarSubsidiado(string numeroLiquidacion)
-        {
-            listaSubsidiado = ConsultarRegimenSubsidiado();
-
-            foreach (var item in listaSubsidiado)
-            {
-                if (item.NumeroLiquidacion.Equals(numeroLiquidacion))
-                {
-                    return item;
-                }
-            }
-
             return null;
         }
     }
