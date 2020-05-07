@@ -54,6 +54,7 @@ namespace DAL
 
         private string Mapear(StreamReader leer)
         {
+            lista.Clear();
             string Linea;
             Liquidacion liquidacion;
             while ((Linea = leer.ReadLine()) != null)
@@ -136,6 +137,12 @@ namespace DAL
             lista = Consultar();
 
             return lista.Where(l => l.NumeroLiquidacion.Equals(numeroLiquidacion)).FirstOrDefault();
+        }
+
+        public IList<Liquidacion> FiltrarPorTipo(string tipo)
+        {
+            lista = Consultar();
+            return lista.Where(l => l.TipoAfiliacion.Equals(tipo)).ToList();
         }
 
         public int TotalPorLiquidacion(string tipo)

@@ -147,7 +147,6 @@
             this.EliminarBton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EliminarBton.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EliminarBton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.EliminarBton.Image = ((System.Drawing.Image)(resources.GetObject("EliminarBton.Image")));
             this.EliminarBton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.EliminarBton.Location = new System.Drawing.Point(6, 321);
             this.EliminarBton.Name = "EliminarBton";
@@ -173,7 +172,6 @@
             this.ConsultarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConsultarBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConsultarBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ConsultarBtn.Image = ((System.Drawing.Image)(resources.GetObject("ConsultarBtn.Image")));
             this.ConsultarBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ConsultarBtn.Location = new System.Drawing.Point(6, 245);
             this.ConsultarBtn.Name = "ConsultarBtn";
@@ -199,7 +197,6 @@
             this.RegistrarBton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegistrarBton.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegistrarBton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.RegistrarBton.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarBton.Image")));
             this.RegistrarBton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.RegistrarBton.Location = new System.Drawing.Point(6, 204);
             this.RegistrarBton.Name = "RegistrarBton";
@@ -225,7 +222,6 @@
             this.ModificarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ModificarBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ModificarBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ModificarBtn.Image = ((System.Drawing.Image)(resources.GetObject("ModificarBtn.Image")));
             this.ModificarBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ModificarBtn.Location = new System.Drawing.Point(6, 283);
             this.ModificarBtn.Name = "ModificarBtn";

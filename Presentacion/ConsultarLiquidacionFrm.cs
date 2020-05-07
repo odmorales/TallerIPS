@@ -62,9 +62,24 @@ namespace Presentacion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
             RespuestaConsulta respuesta = new RespuestaConsulta();
-            respuesta = liquidacion.Consultar();
-            dataGridView1.DataSource = respuesta.Lista;
+            if (TipoBox.Text.Equals("Todos"))
+            {
+                respuesta = liquidacion.Consultar();
+                
+                dataGridView1.DataSource = respuesta.Lista;
+            }else if (TipoBox.Text.Equals("Contributivo"))
+            {
+                
+                dataGridView1.DataSource = liquidacion.FiltrarPorTipo("Contributivo");
+
+            }
+            else if(TipoBox.Text.Equals("Subsidiado"))
+            {
+                
+                dataGridView1.DataSource = liquidacion.FiltrarPorTipo("Subsidiado");
+            }
         }
     }
 }

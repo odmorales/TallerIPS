@@ -106,6 +106,10 @@ namespace BLL
                 return respuesta;
             }
         }
+        public IList<Liquidacion> FiltrarPorTipo(string tipo)
+        {
+            return liquidacionCuotaModeradoraRepository.FiltrarPorTipo(tipo);
+        }
         public int TotalporLiquidacion(string tipo)
         {
             return liquidacionCuotaModeradoraRepository.TotalPorLiquidacion(tipo);
