@@ -46,16 +46,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ConsultarLiquidacionFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ConsultarLiquidacionFrm.Designer.cs">
+      <DependentUpon>ConsultarLiquidacionFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarLiquidacionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EliminarLiquidacionFrm.Designer.cs">
+      <DependentUpon>EliminarLiquidacionFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarLiquidacionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificarLiquidacionFrm.Designer.cs">
+      <DependentUpon>ModificarLiquidacionFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrincipalFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrincipalFrm.Designer.cs">
+      <DependentUpon>PrincipalFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RegistrarFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarFrm.Designer.cs">
+      <DependentUpon>RegistrarFrm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ConsultarLiquidacionFrm.resx">
+      <DependentUpon>ConsultarLiquidacionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EliminarLiquidacionFrm.resx">
+      <DependentUpon>EliminarLiquidacionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificarLiquidacionFrm.resx">
+      <DependentUpon>ModificarLiquidacionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrincipalFrm.resx">
+      <DependentUpon>PrincipalFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RegistrarFrm.resx">
+      <DependentUpon>RegistrarFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -78,6 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{7ea173c5-c537-4e83-a832-66a9ff984978}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityTaller\Entity\Entity.csproj">
+      <Project>{e32d700a-db47-4151-a553-c3368d7539f2}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

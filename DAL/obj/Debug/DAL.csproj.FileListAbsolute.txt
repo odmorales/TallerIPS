@@ -14,3 +14,11 @@ C:\Users\oscar\source\repos\TallerIPS\TallerIPS\DAL\obj\Debug\DAL.csprojAssembly
 C:\Users\oscar\source\repos\TallerIPS\TallerIPS\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\oscar\source\repos\TallerIPS\TallerIPS\DAL\obj\Debug\DAL.dll
 C:\Users\oscar\source\repos\TallerIPS\TallerIPS\DAL\obj\Debug\DAL.pdb
+C:\Users\oscar\Desktop\TallerIPS\DAL\bin\Debug\DAL.dll
+C:\Users\oscar\Desktop\TallerIPS\DAL\bin\Debug\DAL.pdb
+C:\Users\oscar\Desktop\TallerIPS\DAL\bin\Debug\Entity.dll
+C:\Users\oscar\Desktop\TallerIPS\DAL\bin\Debug\Entity.pdb
+C:\Users\oscar\Desktop\TallerIPS\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\oscar\Desktop\TallerIPS\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\oscar\Desktop\TallerIPS\DAL\obj\Debug\DAL.dll
+C:\Users\oscar\Desktop\TallerIPS\DAL\obj\Debug\DAL.pdb

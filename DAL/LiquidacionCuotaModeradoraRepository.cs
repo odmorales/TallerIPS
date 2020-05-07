@@ -15,27 +15,28 @@ namespace DAL
 
         private string ruta = "Liquidacion.txt";
 
-        private List<Liquidacion> lista;
+        private IList<Liquidacion> lista;
 
         public LiquidacionCuotaModeradoraRepository()
         {
             lista = new List<Liquidacion>();
         }
 
-        public void Guardar(Liquidacion liquidacionRegimenContributivo)
+        public void Guardar(Liquidacion liquidacion)
         {
             FileStream fileStream = new FileStream(ruta, FileMode.Append);
             StreamWriter escritor = new StreamWriter(fileStream);
 
-            escritor.WriteLine($"{liquidacionRegimenContributivo.Identificacion};{liquidacionRegimenContributivo.NumeroLiquidacion};{liquidacionRegimenContributivo.Salario};" +
-                $"{liquidacionRegimenContributivo.Tarifa};{liquidacionRegimenContributivo.TipoAfiliacion};{liquidacionRegimenContributivo.ValorServicio};" +
-                $"{liquidacionRegimenContributivo.CuotaModerada};{liquidacionRegimenContributivo.ValorReal}");
+            escritor.WriteLine($"{liquidacion.Identificacion};{liquidacion.NumeroLiquidacion};{liquidacion.Salario};" +
+                $"{liquidacion.Tarifa};{liquidacion.TipoAfiliacion};{liquidacion.ValorServicio};" +
+                $"{liquidacion.CuotaModerada};{liquidacion.ValorReal};{liquidacion.Nombre};{liquidacion.Fecha}" +
+                $";{liquidacion.Tope}");
 
             escritor.Close();
             fileStream.Close();
 
         }
-        public List<Liquidacion> Consultar()
+        public IList<Liquidacion> Consultar()
         {
 
             FileStream fileStream = new FileStream(ruta, FileMode.OpenOrCreate, FileAccess.Read);
@@ -69,6 +70,8 @@ namespace DAL
                 liquidacion.ValorServicio = Convert.ToInt64(Datos[5]);
                 liquidacion.CuotaModerada = Convert.ToDouble(Datos[6]);
                 liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
+                liquidacion.Nombre = Datos[8];
+                liquidacion.Fecha = Convert.ToDateTime(Datos[9]);
 
                 lista.Add(liquidacion);
             }
@@ -131,14 +134,41 @@ namespace DAL
         {
             lista = Consultar();
 
-            foreach (var item in lista)
-            {
-                if (item.NumeroLiquidacion.Equals(numeroLiquidacion))
-                {
-                    return item;
-                }
-            }
-            return null;
+            return lista.Where(l => l.NumeroLiquidacion.Equals(numeroLiquidacion)).FirstOrDefault();
+        }
+
+        public int TotalPorLiquidacion(string tipo)
+        {
+            lista = Consultar();
+
+            return lista.Where(l => l.TipoAfiliacion.Equals(tipo)).Count();
+        }
+        public double TotalCuotaModeradora(string tipo)
+        {
+            lista = Consultar();
+
+            return lista.Where(l => l.TipoAfiliacion.Equals(tipo)).Sum(l => l.CuotaModerada);
+        }
+        public IList<Liquidacion> FiltrarPorFecha(int Mes, int Anio)
+        {
+            lista = Consultar();
+            return lista.Where(l => ((l.Fecha.Year) == Anio && (l.Fecha.Month == Mes))).ToList();
+        }
+
+        public IList<Liquidacion> ConsultarPorPalabra(string palabra)
+        {
+            lista = Consultar();
+            return lista.Where(l => l.Nombre.Contains(palabra)).ToList();
+        }
+        public int TotalLiquidacionTodos()
+        {
+            lista = Consultar();
+            return lista.Count();
+        }
+        public double TotalCuotaModeradoraTodos()
+        {
+            lista = Consultar();
+            return lista.Sum(l => l.CuotaModerada);
         }
     }
 }

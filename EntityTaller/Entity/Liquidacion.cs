@@ -17,7 +17,8 @@ namespace Entity
         public double Tarifa { get; set; }
         public double CuotaModerada { get; set; }
         public double ValorReal { get; set; }
-
+        public DateTime Fecha { get; set; }
+        public string Nombre { get; set; }
         public abstract void CalcularCuatoModeradora();
 
         public abstract void CalcularTope();

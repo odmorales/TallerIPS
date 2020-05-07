@@ -15,18 +15,23 @@ namespace BLL
         Liquidacion liquidacion;
         
 
-        public void GuardarRegimenContributivo(Liquidacion liquidacion)
+        public string Guardar(Liquidacion liquidacion)
         {
-            liquidacionCuotaModeradoraRepository.Guardar(liquidacion);
+           
+                liquidacionCuotaModeradoraRepository.Guardar(liquidacion);
+                return "Guardado Correctamente";
+          
         }
 
-        public List<Liquidacion> ConsultarRegimenContributivo()
+        public IList<Liquidacion> Consultar()
         {
             return liquidacionCuotaModeradoraRepository.Consultar();
         }
-        public void Modificar(Liquidacion liquidacion)
+        public string Modificar(Liquidacion liquidacion)
         {
             liquidacionCuotaModeradoraRepository.Modificar(liquidacion);
+
+            return $"La liquidacion con el numero{liquidacion.NumeroLiquidacion} ha sido modificado";
         }
 
         public string Eliminar(string numeroLiquidacion)
@@ -45,6 +50,31 @@ namespace BLL
             }
 
             return null;
+        }
+        public int TotalporLiquidacion(string tipo)
+        {
+            return liquidacionCuotaModeradoraRepository.TotalPorLiquidacion(tipo);
+        }
+        public int TotalLiquidacionTodos()
+        {
+            return liquidacionCuotaModeradoraRepository.TotalLiquidacionTodos();
+        }
+        public double TotalCuotaModeradora(string tipo)
+        {
+            return liquidacionCuotaModeradoraRepository.TotalCuotaModeradora(tipo);
+        }
+        public IList<Liquidacion> FiltrarPorFecha(int Mes, int Anio)
+        {
+            return liquidacionCuotaModeradoraRepository.FiltrarPorFecha(Mes, Anio);
+        }
+        public IList<Liquidacion> ConsultarPorPalabra(string palabra)
+        {
+            
+            return liquidacionCuotaModeradoraRepository.ConsultarPorPalabra(palabra);
+        }
+        public double TotalCuotaModeradoraTodos()
+        {    
+            return liquidacionCuotaModeradoraRepository.TotalCuotaModeradoraTodos();
         }
         public LiquidacionCuotaModeradoraService()
         {

@@ -30,8 +30,12 @@ namespace Entity
             {
                 Tope = 900000;
             }
+            else if(cantidadSalario > 5 && (CuotaModerada > 1500000))
+            {
+                Tope = 1500000;
+            }
 
-            Tope = 1500000;
+            Tope = 0;
         }
 
 

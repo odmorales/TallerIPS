@@ -3,3 +3,8 @@ C:\Users\oscar\Desktop\ProyectosC#\Taller\EntityTaller\Entity\bin\Debug\Entity.p
 C:\Users\oscar\Desktop\ProyectosC#\Taller\EntityTaller\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
 C:\Users\oscar\Desktop\ProyectosC#\Taller\EntityTaller\Entity\obj\Debug\Entity.dll
 C:\Users\oscar\Desktop\ProyectosC#\Taller\EntityTaller\Entity\obj\Debug\Entity.pdb
+C:\Users\oscar\Desktop\TallerIPS\EntityTaller\Entity\bin\Debug\Entity.dll
+C:\Users\oscar\Desktop\TallerIPS\EntityTaller\Entity\bin\Debug\Entity.pdb
+C:\Users\oscar\Desktop\TallerIPS\EntityTaller\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
+C:\Users\oscar\Desktop\TallerIPS\EntityTaller\Entity\obj\Debug\Entity.dll
+C:\Users\oscar\Desktop\TallerIPS\EntityTaller\Entity\obj\Debug\Entity.pdb

@@ -21,7 +21,7 @@ namespace Entity
             {
                 Tope = 200000;
             }
-
+            Tope = 0;
         }
         public override void CalcularTarifa()
         {
