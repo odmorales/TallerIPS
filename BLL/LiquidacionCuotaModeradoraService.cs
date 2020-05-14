@@ -29,7 +29,10 @@ namespace BLL
                        
           
         }
-
+        public void GuardarPorFiltro(IList<Liquidacion> liquidacions,string ruta)
+        {
+            liquidacionCuotaModeradoraRepository.GuardarPorFiltro(liquidacions, ruta);
+        }
         public RespuestaConsulta Consultar()
         {
             RespuestaConsulta respuesta = new RespuestaConsulta();

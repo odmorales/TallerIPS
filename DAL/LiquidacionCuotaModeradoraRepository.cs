@@ -10,18 +10,11 @@ namespace DAL
 {
     public class LiquidacionCuotaModeradoraRepository
     {
-
-        
-
+           
         private string ruta = "Liquidacion.txt";
 
         private IList<Liquidacion> lista;
-
-        public LiquidacionCuotaModeradoraRepository()
-        {
-            lista = new List<Liquidacion>();
-        }
-
+      
         public void Guardar(Liquidacion liquidacion)
         {
             FileStream fileStream = new FileStream(ruta, FileMode.Append);
@@ -38,47 +31,45 @@ namespace DAL
         }
         public IList<Liquidacion> Consultar()
         {
-
+            lista = new List<Liquidacion>();
             FileStream fileStream = new FileStream(ruta, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader leer = new StreamReader(fileStream);
 
             string Linea = string.Empty;
             Linea = leer.ReadLine();
-            Linea = Mapear(leer);
-
+            
+            while ((Linea = leer.ReadLine()) != null)
+            {
+                Mapear(Linea);
+            }
+                                 
             leer.Close();
             fileStream.Close();
 
             return lista;
         }
 
-        private string Mapear(StreamReader leer)
+        private void Mapear(string Linea)
         {
-            lista.Clear();
-            string Linea;
             Liquidacion liquidacion;
-            while ((Linea = leer.ReadLine()) != null)
-            {
-                char delimiter = ';';
-                string[] Datos = Linea.Split(delimiter);
-                liquidacion = Liquidar(Datos);
+            char delimiter = ';';
+            string[] Datos = Linea.Split(delimiter);
+            liquidacion = Liquidar(Datos);
 
-                liquidacion.Identificacion = Datos[0];
-                liquidacion.NumeroLiquidacion = Datos[1];
-                liquidacion.Salario = Convert.ToInt64(Datos[2]);
-                liquidacion.Tarifa = Convert.ToDouble(Datos[3]);
-                liquidacion.TipoAfiliacion = Datos[4];
-                liquidacion.ValorServicio = Convert.ToInt64(Datos[5]);
-                liquidacion.CuotaModerada = Convert.ToDouble(Datos[6]);
-                liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
-                liquidacion.Nombre = Datos[8];
-                liquidacion.Fecha = Convert.ToDateTime(Datos[9]);
-                liquidacion.Tope = Convert.ToInt64(Datos[10]);
+            liquidacion.Identificacion = Datos[0];
+            liquidacion.NumeroLiquidacion = Datos[1];
+            liquidacion.Salario = Convert.ToInt64(Datos[2]);
+            liquidacion.Tarifa = Convert.ToDouble(Datos[3]);
+            liquidacion.TipoAfiliacion = Datos[4];
+            liquidacion.ValorServicio = Convert.ToInt64(Datos[5]);
+            liquidacion.CuotaModerada = Convert.ToDouble(Datos[6]);
+            liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
+            liquidacion.Nombre = Datos[8];
+            liquidacion.Fecha = Convert.ToDateTime(Datos[9]);
+            liquidacion.Tope = Convert.ToInt64(Datos[10]);
 
-                lista.Add(liquidacion);
-            }
-
-            return Linea;
+            lista.Add(liquidacion);
+            
         }
 
         private static Liquidacion Liquidar(string[] Datos)
@@ -131,6 +122,19 @@ namespace DAL
                     Guardar(item);
                 }
             }
+        }
+        public void GuardarPorFiltro(IList<Liquidacion> liquidacions, string rutaFiltro)
+        {
+            StreamWriter escritor = new StreamWriter(rutaFiltro, false);
+
+            foreach (var liquidacion in liquidacions)
+            {
+                escritor.WriteLine($"{liquidacion.Identificacion};{liquidacion.NumeroLiquidacion};{liquidacion.Salario};" +
+                $"{liquidacion.Tarifa};{liquidacion.TipoAfiliacion};{liquidacion.ValorServicio};" +
+                $"{liquidacion.CuotaModerada};{liquidacion.ValorReal};{liquidacion.Nombre};{liquidacion.Fecha}" +
+                $";{liquidacion.Tope}");
+            }
+            escritor.Close();
         }
          public Liquidacion Buscar(string numeroLiquidacion)
         {

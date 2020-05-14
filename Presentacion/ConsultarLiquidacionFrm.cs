@@ -70,15 +70,14 @@ namespace Presentacion
                 
                 dataGridView1.DataSource = respuesta.Lista;
             }else if (TipoBox.Text.Equals("Contributivo"))
-            {
-                
+            {                
                 dataGridView1.DataSource = liquidacion.FiltrarPorTipo("Contributivo");
-
+                liquidacion.GuardarPorFiltro(liquidacion.FiltrarPorTipo("Contributivo"), "Contributivo.txt");
             }
             else if(TipoBox.Text.Equals("Subsidiado"))
-            {
-                
+            {                
                 dataGridView1.DataSource = liquidacion.FiltrarPorTipo("Subsidiado");
+                liquidacion.GuardarPorFiltro(liquidacion.FiltrarPorTipo("Subsidiado"), "Subsidiado.txt");
             }
         }
     }
