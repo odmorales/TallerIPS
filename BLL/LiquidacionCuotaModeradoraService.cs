@@ -10,24 +10,24 @@ namespace BLL
 {
     public class LiquidacionCuotaModeradoraService
     {
-
+        
         LiquidacionCuotaModeradoraRepository liquidacionCuotaModeradoraRepository;
-        
-        
+        private ConnectionManager conexion;
+
+        public LiquidacionCuotaModeradoraService(string cadenaConexion)
+        {            
+            conexion = new ConnectionManager(cadenaConexion);
+            liquidacionCuotaModeradoraRepository = new LiquidacionCuotaModeradoraRepository(conexion);
+        }
 
         public string Guardar(Liquidacion liquidacion)
         {
-            try
-            {
+            
+                conexion.Open();
                 liquidacionCuotaModeradoraRepository.Guardar(liquidacion);
+                conexion.Close();
                 return "Guardado Correctamente";
-            }
-            catch (Exception e)
-            {
-                return $"Error: {e.Message}";
-            }
-                       
-          
+                   
         }
         public void GuardarPorFiltro(IList<Liquidacion> liquidacions,string ruta)
         {
@@ -38,7 +38,9 @@ namespace BLL
             RespuestaConsulta respuesta = new RespuestaConsulta();
             try
             {
+
                 respuesta.Error = false;
+                conexion.Open();
                 respuesta.Lista = liquidacionCuotaModeradoraRepository.Consultar();
                 if(respuesta.Lista != null)
                 {
@@ -56,6 +58,10 @@ namespace BLL
                 respuesta.Mensaje = $"Error, la consulta ha fallado: {e.Message}";
                 respuesta.Lista = null;
                 return respuesta;
+            }
+            finally
+            {
+                conexion.Close();
             }
             
         }
@@ -111,7 +117,22 @@ namespace BLL
         }
         public IList<Liquidacion> FiltrarPorTipo(string tipo)
         {
-            return liquidacionCuotaModeradoraRepository.FiltrarPorTipo(tipo);
+            try
+            {
+                conexion.Open();
+                return liquidacionCuotaModeradoraRepository.FiltrarPorTipo(tipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            
+            
         }
         public int TotalporLiquidacion(string tipo)
         {
@@ -119,6 +140,7 @@ namespace BLL
         }
         public int TotalLiquidacionTodos()
         {
+            
             return liquidacionCuotaModeradoraRepository.TotalLiquidacionTodos();
         }
         public double TotalCuotaModeradora(string tipo)
@@ -138,10 +160,7 @@ namespace BLL
         {    
             return liquidacionCuotaModeradoraRepository.TotalCuotaModeradoraTodos();
         }
-        public LiquidacionCuotaModeradoraService()
-        {
-            liquidacionCuotaModeradoraRepository = new LiquidacionCuotaModeradoraRepository();
-        }
+       
     }
     public class RespuestaConsulta
     {

@@ -15,10 +15,12 @@ namespace Presentacion
 {
     public partial class RegistrarFrm : Form
     {
-        LiquidacionCuotaModeradoraService liquidacionCuotaModeradoraService = new LiquidacionCuotaModeradoraService();
+        LiquidacionCuotaModeradoraService liquidacionS;
         Liquidacion liquidacion;
         public RegistrarFrm()
         {
+            
+            liquidacionS = new LiquidacionCuotaModeradoraService(ConfigConnection.connectionString);
             InitializeComponent();
         }
 
@@ -45,7 +47,7 @@ namespace Presentacion
             liquidacion.CalcularTarifa();
             liquidacion.CalcularCuatoModeradora();
             liquidacion.CalcularTope();
-            MessageBox.Show(liquidacionCuotaModeradoraService.Guardar(liquidacion),"Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(liquidacionS.Guardar(liquidacion),"Informacion",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }
 }

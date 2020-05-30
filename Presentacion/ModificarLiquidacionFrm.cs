@@ -14,10 +14,11 @@ namespace Presentacion
 {
     public partial class ModificarLiquidacionFrm : Form
     {
-        LiquidacionCuotaModeradoraService liquidacion = new LiquidacionCuotaModeradoraService();
+        LiquidacionCuotaModeradoraService liquidacion;
         Liquidacion liquidacion1;
         public ModificarLiquidacionFrm()
         {
+            liquidacion = new LiquidacionCuotaModeradoraService(ConfigConnection.connectionString);
             InitializeComponent();
         }
 

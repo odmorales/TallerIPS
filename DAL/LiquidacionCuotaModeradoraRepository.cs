@@ -5,77 +5,88 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace DAL
 {
     public class LiquidacionCuotaModeradoraRepository
     {
            
-        private string ruta = "Liquidacion.txt";
-
+        
+        SqlConnection connection;
         private IList<Liquidacion> lista;
-      
+
+        public LiquidacionCuotaModeradoraRepository(ConnectionManager connectionManager)
+        {
+            connection = connectionManager.connection;
+        }
         public void Guardar(Liquidacion liquidacion)
         {
-            FileStream fileStream = new FileStream(ruta, FileMode.Append);
-            StreamWriter escritor = new StreamWriter(fileStream);
+            
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "INSERT INTO Liquidacion (NumeroLiquidacion,Identificaion,Salario,Tarifa,TipoAfiliacion," +
+                                    "ValorServicio,CuotaModerada,ValorReal,Nombre,Fecha,Tope) values(@NumeroLiquidacion,@Identificaion,@Salario,@Tarifa,@TipoAfiliacion," +
+                                    "@ValorServicio,@CuotaModerada,@ValorReal,@Nombre,@Fecha,@Tope)";
+                command.Parameters.AddWithValue("@NumeroLiquidacion", liquidacion.NumeroLiquidacion);
+                command.Parameters.AddWithValue("@Identificaion", liquidacion.Identificacion);
+                command.Parameters.AddWithValue("@Salario", liquidacion.Salario);
+                command.Parameters.AddWithValue("@Tarifa", liquidacion.Tarifa);
+                command.Parameters.AddWithValue("@TipoAfiliacion", liquidacion.TipoAfiliacion);
+                command.Parameters.AddWithValue("@ValorServicio", liquidacion.ValorServicio);
+                command.Parameters.AddWithValue("@CuotaModerada", liquidacion.CuotaModerada);
+                command.Parameters.AddWithValue("@ValorReal", liquidacion.ValorReal);
+                command.Parameters.AddWithValue("@Nombre", liquidacion.Nombre);
+                command.Parameters.AddWithValue("@Fecha", liquidacion.Fecha);
+                command.Parameters.AddWithValue("@Tope", liquidacion.Tope);
 
-            escritor.WriteLine($"{liquidacion.Identificacion};{liquidacion.NumeroLiquidacion};{liquidacion.Salario};" +
-                $"{liquidacion.Tarifa};{liquidacion.TipoAfiliacion};{liquidacion.ValorServicio};" +
-                $"{liquidacion.CuotaModerada};{liquidacion.ValorReal};{liquidacion.Nombre};{liquidacion.Fecha}" +
-                $";{liquidacion.Tope}");
-
-            escritor.Close();
-            fileStream.Close();
-
+                command.ExecuteNonQuery();               
+            }
+                
         }
         public IList<Liquidacion> Consultar()
         {
             lista = new List<Liquidacion>();
-            FileStream fileStream = new FileStream(ruta, FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader leer = new StreamReader(fileStream);
-
-            string Linea = string.Empty;
-            Linea = leer.ReadLine();
-            
-            while ((Linea = leer.ReadLine()) != null)
+            using (var command = connection.CreateCommand())
             {
-                Mapear(Linea);
+                command.CommandText = "select * from Liquidacion";
+                SqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        Liquidacion liquidacion = DataReaderMapLiquidacion(dataReader);
+                        lista.Add(liquidacion);
+                    }
+                }    
             }
-                                 
-            leer.Close();
-            fileStream.Close();
-
             return lista;
         }
 
-        private void Mapear(string Linea)
+        private Liquidacion DataReaderMapLiquidacion(SqlDataReader dataReader)
         {
-            Liquidacion liquidacion;
-            char delimiter = ';';
-            string[] Datos = Linea.Split(delimiter);
-            liquidacion = Liquidar(Datos);
+            if (!dataReader.HasRows) return null;
 
-            liquidacion.Identificacion = Datos[0];
-            liquidacion.NumeroLiquidacion = Datos[1];
-            liquidacion.Salario = Convert.ToInt64(Datos[2]);
-            liquidacion.Tarifa = Convert.ToDouble(Datos[3]);
-            liquidacion.TipoAfiliacion = Datos[4];
-            liquidacion.ValorServicio = Convert.ToInt64(Datos[5]);
-            liquidacion.CuotaModerada = Convert.ToDouble(Datos[6]);
-            liquidacion.ValorReal = Convert.ToDouble(Datos[7]);
-            liquidacion.Nombre = Datos[8];
-            liquidacion.Fecha = Convert.ToDateTime(Datos[9]);
-            liquidacion.Tope = Convert.ToInt64(Datos[10]);
+            Liquidacion liquidacion = Liquidar(dataReader);
 
-            lista.Add(liquidacion);
+            liquidacion.NumeroLiquidacion = dataReader.GetString(0);
+            liquidacion.Identificacion = dataReader.GetString(1);
+            liquidacion.Salario = dataReader.GetInt32(2);
+            liquidacion.Tarifa = dataReader.GetDouble(3);
+            liquidacion.TipoAfiliacion = dataReader.GetString(4);
+            liquidacion.ValorServicio = dataReader.GetInt32(5); 
+            liquidacion.CuotaModerada = dataReader.GetDouble(6); 
+            liquidacion.ValorReal = dataReader.GetDouble(7); 
+            liquidacion.Nombre = dataReader.GetString(8); 
+            liquidacion.Fecha = dataReader.GetDateTime(9); 
+            liquidacion.Tope = dataReader.GetInt32(10);
             
+            return liquidacion;
         }
-
-        private static Liquidacion Liquidar(string[] Datos)
+        private static Liquidacion Liquidar(SqlDataReader dataReader)
         {
             Liquidacion liquidacion;
-            if (Datos[4].Equals("Contribuyente"))
+            if (dataReader.GetString(4).Equals("Contribuyente"))
             {
                 liquidacion = new LiquidacionRegimenContributivo();
             }
@@ -90,37 +101,35 @@ namespace DAL
         public void Eliminar(string numeroLiquidacion)
         {
 
-            lista = Consultar();
-
-            FileStream fileStream = new FileStream(ruta, FileMode.Create);
-            fileStream.Close();
-
-            foreach (var item in lista)
+            using (var command = connection.CreateCommand())
             {
-                if(item.NumeroLiquidacion != numeroLiquidacion)
-                {
-                    Guardar(item);
-                }
+                command.CommandText = "DELETE from Liquidacion where NumeroLiquidacion = @NumeroLiquidacion";
+                command.Parameters.AddWithValue("@NumeroLiquidacion", numeroLiquidacion);
+                
+
+                command.ExecuteNonQuery();
             }
         }
 
         public void Modificar(Liquidacion liquidacion)
         {
-            lista = Consultar();
-
-            FileStream fileStream = new FileStream(ruta, FileMode.Create);
-            fileStream.Close();
-
-            foreach (var item in lista)
+            using (var command = connection.CreateCommand())
             {
-                if (item.NumeroLiquidacion.Equals(liquidacion.NumeroLiquidacion))
-                {
-                    Guardar(liquidacion);
-                }
-                else
-                {
-                    Guardar(item);
-                }
+                command.CommandText = "UPDATE Liquidacion set Identificacion=@Identificacion, Salario=@Salario, Tarifa=@Tarifa,TipoAfiliacion=@TipoAfiliacion," +
+                    "ValorServicio=@ValorServicio, CuotaModerada=@CuotaModerada, ValorReal=@ValorReal, Nombre=@Nombre, Fecha=@Fecha, " +
+                    "Tope=@Tope";
+                command.Parameters.AddWithValue("@NumeroLiquidacion", liquidacion.NumeroLiquidacion);
+                command.Parameters.AddWithValue("@Identificacion", liquidacion.Identificacion);
+                command.Parameters.AddWithValue("@Salario", liquidacion.Salario);
+                command.Parameters.AddWithValue("@Tarifa", liquidacion.Tarifa);
+                command.Parameters.AddWithValue("@TipoAfiliacion", liquidacion.TipoAfiliacion);
+                command.Parameters.AddWithValue("@ValorServicio", liquidacion.ValorServicio);
+                command.Parameters.AddWithValue("@CuotaModerada", liquidacion.CuotaModerada);
+                command.Parameters.AddWithValue("@ValorReal", liquidacion.ValorReal);
+                command.Parameters.AddWithValue("@Nombre", liquidacion.Nombre);
+                command.Parameters.AddWithValue("@Fecha", liquidacion.Fecha);
+                command.Parameters.AddWithValue("@Tope", liquidacion.Tope);
+                command.ExecuteNonQuery();
             }
         }
         public void GuardarPorFiltro(IList<Liquidacion> liquidacions, string rutaFiltro)
